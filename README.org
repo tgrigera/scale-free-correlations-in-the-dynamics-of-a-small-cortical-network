@@ -1,0 +1,40 @@
+* Code for _Scale-free correlations..._
+
+** Contents
+
+*** Data
+
+The scripts run on the experimental data by Stringer et al (2018),
+which need to be downloaded separately and pre-processed, see
+[[file:./Stringer-data][Stringer-data]].
+
+*** Julia scripts
+
+The following scripts are the drivers for the data analysis. ~include~
+them from the Julia REPL (or other front end) and invoke the ~do_xx()~
+function as indicated below to run the analysis.  These scripts will
+call code from the [[./code][code]] directory, which additionally depends on
+functions from the [[https://github.com/tgrigera/BioStatPhys.jl][BioStatPhys]] package.
+
+ - =space_corr.jl= :: Computes the space correlations C(r), Cd(r) and
+   G(r) using windows of different sizes.  Run by calling
+   ~do_space_corr()~.
+
+
+** License
+
+All code is licensed under the GNU General Public License, Version 3.
+
+The programs in this repository are free software: you can
+redistribute them and/or modify them under the terms of the GNU General
+Public License as published by the Free Software Foundation, either
+version 3 of the License, or (at your option) any later version.
+
+These programs are distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+See the file [[file:./LICENSE][LICENSE]] for the full text of the GPL license.
+
+
