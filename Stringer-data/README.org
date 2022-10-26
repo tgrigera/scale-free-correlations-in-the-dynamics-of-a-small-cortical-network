@@ -1,0 +1,10 @@
+* Experimental data by Stringer et al
+
+In order to run the Julia analysis scripts of this repository, this directory should contain the original data by Stringer et al (2018).
+
+Data must be downloaded from the reference below, then converted to the ~.dat~ format expected by the Julia scripts by running the [[./convert_exp_files.m][convert_exp_files.m]] Matlab script.
+
+The experimental data has been published in:
+
+- C. Stringer, M. Pachitariu, C. B. Reddy, M. Carandini, and K. D. Harris,
+  Recordings of 10,000 neurons in visual cortex in response to 2,800 natural images.   /Janelia Research Campus. Dataset/ (2018). [[https://doi.org/10.25378/janelia.6845348.v4][DOI 10.25378/janelia.6845348.v4]]
