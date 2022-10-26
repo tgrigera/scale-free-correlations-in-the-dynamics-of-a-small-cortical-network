@@ -1,0 +1,5 @@
+* Auxiliary functions for correlation computation
+
+- settings.jl :: loads basic parameters, such as directory names and list of files
+- rdmouse.jl :: data reading and basic transformations
+- scorr.jl :: auxiliary functions for space correlations

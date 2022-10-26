@@ -79,8 +79,78 @@ function process_mouse(mouse;threshold=0.,filterth=0,layers=settings.layerlist,r
     end
 end
 
-function do_space_corr()
-    for mouse in settings.mouse_list
-        process_mouse(mouse,threshold=0.,rotations=9)
+function findr0(mouse,layerlist,Wlist,pref,corrdir)
+    tt=[]
+    for layer in layerlist
+        for W in Wlist
+            cfile=corrdir*"/$(pref)_$(mouse)_layer_$(layer)_W$W.dat"
+            if !isfile(cfile) continue end
+            C=readdlm(cfile)
+            # ad-hoc corrections for mouse2 and 3
+            if (mouse=="mouse2" && layer==1) || (mouse=="mouse3" && (layer==9 || layer==10))
+                    C=C[1:end .!=2,:]
+            end
+            r0=correlation_length_r0(C[:,1],C[:,2])
+            push!(tt,[mouse layer W r0])
+        end
     end
+    if length(tt)==0 return [missing missing missing missing] end
+    tt=vcat(tt...)    # Reallocates the whole thing, not good for large arrays
+    for W in Wlist
+        mask=tt[:,3].==W
+        if count(mask)<1 continue end
+        rm=Statistics.mean(tt[mask,4])
+        tt=vcat(tt,[mouse "avg" W rm])
+    end
+    return tt
+end
+
+function findr0Gr(mouse,layerlist,Wlist,corrdir)
+    tt=[]
+    for layer in layerlist
+        for W in Wlist
+            cfile=corrdir*"/Gr_$(mouse)_layer_$(layer)_W$W.dat"
+            if !isfile(cfile) continue end
+            C=readdlm(cfile)
+            C[1,2]=1
+            r0=correlation_length_r0(C[:,1],C[:,2].-1)
+            push!(tt,[mouse layer W r0])
+        end
+    end
+    if length(tt)==0 return [missing missing missing missing] end
+    tt=vcat(tt...)
+    for W in Wlist
+        mask=tt[:,3].==W
+        if count(mask)<1 continue end
+        rm=Statistics.mean(tt[mask,4])
+        tt=vcat(tt,[mouse "avg" W rm])
+    end
+    return tt
+end
+
+function do_space_corr()
+    threshold=0.
+    filterth=0
+    rotations=9
+    # Compute correlations
+
+    for mouse in settings.mouse_list
+        process_mouse(mouse,threshold=threshold,filterth=filterth,rotations=rotations)
+    end
+
+    # Compute r0
+
+    r0Crtab=["#mouse" "layer" "W" "r0" ];
+    r0Crdtab=["#mouse" "layer" "W" "r0" ];
+    r0Grtab=["#mouse" "layer" "W" "r0" ];
+    corrdir=settings.space_corr_dir*"/athresh=$(threshold)_fthresh=$(filterth)_rotations=$(rotations)"
+    for mouse in settings.mouse_list
+        print("Computing r0, $mouse, $corrdir\n")
+        r0Crtab=vcat(r0Crtab,findr0(mouse,settings.layerlist,settings.Wlist,"Cr",corrdir))
+        r0Crdtab=vcat(r0Crdtab,findr0(mouse,settings.layerlist,settings.Wlist,"Crd",corrdir))
+        r0Grtab=vcat(r0Grtab,findr0Gr(mouse,settings.layerlist,settings.Wlist,corrdir))
+    end
+    writedlm(corrdir*"/r0W_Cr.dat",r0Crtab)
+    writedlm(corrdir*"/r0W_Crd.dat",r0Crdtab)
+    writedlm(corrdir*"/r0W_Gr.dat",r0Grtab)
 end

@@ -1,4 +1,4 @@
-* Code for _Scale-free correlations..._
+* Code for /Scale-free correlations.../
 
 ** Contents
 
