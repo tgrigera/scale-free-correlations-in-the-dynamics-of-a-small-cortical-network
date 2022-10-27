@@ -30,6 +30,7 @@ Base.@kwdef struct Settings
 
     edata_dir = "./Stringer-data"
     space_corr_dir = "./space_corr"
+    time_corr_dir = "./time_corr"
 end
 
 settings = Settings()

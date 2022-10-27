@@ -1,4 +1,4 @@
-# scorr.jl -- Functions for space correlation
+# corr.jl -- Functions for correlation functions
 #
 # Copyright (C) 2022 by the AUTHORS
 #
@@ -138,3 +138,48 @@ function three_corrs_box(mpos,signal,W,Δr;normalize=false,threshold=0.,
     Gr./=nsGr
     return return_pair_count ? (r,Cr,Crd,Gr,npairs) : (r,Cr,Crd,Gr)
 end
+
+function tcorr_self(signal,Δt=1;normalize=false)
+    corr=zeros(Float64,size(signal,2)÷2)
+    nparts=0
+    for i=1:size(signal,1)
+        if any(signal[i,:].>0)
+            c=time_correlation(signal[i,:],connected=true,normalized=normalize)
+            corr .+= c
+            nparts+=1
+        end
+    end
+    return Δt*collect(0:size(corr,1)-1),corr/nparts
+end
+
+function tcorr_box(mpos,signal,W,Δt=1;rotations=1)
+    is3d= size(mpos,2)==3
+    rmax=is3d ?  sqrt(3)*W : sqrt(2)*W
+
+    someneg=any(signal.<0) 
+    corr=zeros(Float64,size(signal,2)÷2)
+    c=zero(corr)
+    tseries=zeros(Float64,size(signal,2))
+    nbxs=0
+    for irot=0:rotations-1
+        θ=irot*2π/rotations
+        pos= θ > 0 ? rotate_pos(mpos,θ)  : mpos
+        bxs= is3d ? boxing_3d(pos,W) : boxing(pos,W)
+        for box in bxs
+            tseries=sum(signal[box,:],dims=1)[1,:]
+            if someneg || any(tseries.>0)
+                c=time_correlation(tseries,connected=true,normalized=false)
+                corr .+= c
+                nbxs+=1
+            end
+        end
+    end
+    return Δt*collect(0:size(corr,1)-1),corr/nbxs
+end
+
+function tau_threshold(t,C,threshold=0.1)
+    it=findfirst(x->x<threshold,C/C[1])
+    if !isnan(C[it-1]) return t[it-1] - (C[it-1]/C[1]-threshold)*(t[it]-t[it-1])/((C[it]-C[it-1])/C[1])
+    else return t[it]
+    end
+end    

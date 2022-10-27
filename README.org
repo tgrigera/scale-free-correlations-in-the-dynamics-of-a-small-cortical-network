@@ -16,9 +16,11 @@ function as indicated below to run the analysis.  These scripts will
 call code from the [[./code][code]] directory, which additionally depends on
 functions from the [[https://github.com/tgrigera/BioStatPhys.jl][BioStatPhys]] package.
 
- - =space_corr.jl= :: Computes the space correlations C(r), Cd(r) and
+ - =space-corr.jl= :: Computes the space correlations C(r), Cd(r) and
    G(r) using windows of different sizes.  Run by calling
    ~do_space_corr()~.
+
+ - =time-corr.jl= :: Computes the time correlations using windows of different sizes.  Run by calling ~do_time_corr()~.
 
 
 ** License

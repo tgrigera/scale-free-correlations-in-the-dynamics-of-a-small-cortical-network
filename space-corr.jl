@@ -17,7 +17,7 @@
 # <https://www.gnu.org/licenses/>.
 
 include("./code/rdmouse.jl")
-include("./code/scorr.jl")
+include("./code/corr.jl")
 
 function process_mouse(mouse;threshold=0.,filterth=0,layers=settings.layerlist,rotations=1)
     print("* $mouse w/ threshold $threshold, filtering = $filterth\n")
