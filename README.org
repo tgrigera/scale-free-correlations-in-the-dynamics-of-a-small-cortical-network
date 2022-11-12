@@ -4,17 +4,14 @@
 
 *** Data
 
-The scripts run on the experimental data by Stringer et al (2018),
-which need to be downloaded separately and pre-processed, see
-[[file:./Stringer-data][Stringer-data]].
+The scripts run on the experimental data by Stringer et al (2018), which need to be downloaded separately and pre-processed, see [[file:./Stringer-data][Stringer-data]].
 
 *** Julia scripts
 
-The following scripts are the drivers for the data analysis. ~include~
-them from the Julia REPL (or other front end) and invoke the ~do_xx()~
-function as indicated below to run the analysis.  These scripts will
-call code from the [[./code][code]] directory, which additionally depends on
-functions from the [[https://github.com/tgrigera/BioStatPhys.jl][BioStatPhys]] package.
+The following scripts are the drivers for the data analysis. ~include~ them from the Julia REPL (or other front end) and invoke the ~do_xx()~ function as indicated below to run the analysis.  These scripts will call code from the [[./code][code]] directory, which additionally depends on functions from the [[https://github.com/tgrigera/BioStatPhys.jl][BioStatPhys]] package.  Since this is not an official =Julia= package, it needs to be installed giving the complete URL:
+: julia> ]add http://github.com/tgrigera/BioStatPhys.jl
+or, to get the version current when these scripts where created,
+: julia> ]add http://github.com/tgrigera/BioStatPhys.jl#v1.0.0
 
  - =space-corr.jl= :: Computes the space correlations C(r), Cd(r) and
    G(r) using windows of different sizes.  Run by calling
