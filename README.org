@@ -1,5 +1,7 @@
 * Code for /Scale-free correlations.../
 
+[[https://zenodo.org/badge/latestdoi/554518575)][https://zenodo.org/badge/554518575.svg]]
+
 ** Contents
 
 *** Data
