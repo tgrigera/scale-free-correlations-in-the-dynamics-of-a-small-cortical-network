@@ -1,0 +1,9 @@
+cff-version: 1.1.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Tomas Sebastian
+    given-names: Grigera
+    orcid: https://orcid.org/0000-0002-3165-4838
+title: tgrigera/scale-free-correlations-in-the-dynamics-of-a-small-cortical-network: First release
+version: v1.0.0
+date-released: 2022-11-12
