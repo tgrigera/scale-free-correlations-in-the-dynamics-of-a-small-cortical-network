@@ -1,0 +1,36 @@
+# This script generates the average C(r) for all windows of size W, for each sample i, and each Threshold Tr
+
+
+# This script Finds the zero crossings of C(r) for each windows of size W, for each sample i, and each Threshold Tr
+for file in Original Shuffle Arousal TimeBinning Convol ConvolNoise; do
+mkdir -p AllCorrelations$file
+# Fast Run
+for Tr in  0.3100 0.3180 0.3300; do
+
+mkdir -p AllCorrelations$file""/Correlation-Tr$Tr
+for i in 1 2 3; do 
+# replace by the number of used seeds, for instace:
+#for i in $(seq 1 5); do
+
+
+for W in 30 50 70 100 150; do
+
+output=AllCorrelations$file""/Correlation-Tr$Tr""/AvgCCF-Tr$Tr""Run$i""Length$W"".dat
+rm -f $output
+
+# Generate unnormalized average
+rm -f draftfile
+MAXDIST=$(grep $Tr ../MAXDISTtable | awk -v W=$W '{if ($2==W) print $3}')
+for d in $(seq 0 $MAXDIST ); do
+ awk -v d=$d '{if ($1==d) {N+=$3;D+=$4}} END {print d,N/D,N,D}' ../CCF1-CorrelationAnalisys/ResultsCorrel$file""/CorrelRun$i""-Tr$Tr""W$W""x*.dat  >>  draftfile
+done 
+# Normalize so that C(0)=1
+norm=$(head -n 1 draftfile |awk '{print 1/$2}')
+awk -v norm=$norm '{print $1, $2*norm}' draftfile > $output
+rm draftfile
+
+
+done
+done
+done
+done

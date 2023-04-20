@@ -1,0 +1,114 @@
+# Run gnuplot GnuFig_SI*
+
+set terminal pdfcairo size 6.0in,4.0in font ',8'
+set output "Figure12.pdf"
+
+
+
+set key  font ",6" 
+set xtics 0.05
+
+set xrange [1:300]
+set yrange [-0.3:1]
+
+     set multiplot
+
+#------------------------------------------------------------------------------
+# Up Left
+#------------------------------------------------------------------------------ 
+     set size 0.27,0.4
+     set origin 0.1,0.5
+     set title "Supercritical"
+
+set logscale x
+#set xtics 50
+#set ytics 30
+set xlabel "t"
+set ylabel "C(t)"
+
+plot "../2B-TimeCorrel/AC2-Autocorr/AutocorrOriginal/ACTr0.3100W30x1y1.dat" w l t "W=30",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrOriginal/ACTr0.3100W50x1y1.dat" w l t "W=50",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrOriginal/ACTr0.3100W70x1y1.dat" w l t "W=70",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrOriginal/ACTr0.3100W100x1y1.dat" w l t "W=100",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrOriginal/ACTr0.3100W150x1y1.dat" w l t "W=150", 0 lc "black"
+
+
+#------------------------------------------------------------------------------
+# Up Mid
+#------------------------------------------------------------------------------ 
+     set size 0.27,0.4
+     set origin 0.4,0.5
+     set title "Critical"
+	set nokey
+
+plot "../2B-TimeCorrel/AC2-Autocorr/AutocorrOriginal/ACTr0.3180W30x1y1.dat" w l t "W=30",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrOriginal/ACTr0.3180W50x1y1.dat" w l t "W=50",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrOriginal/ACTr0.3180W70x1y1.dat" w l t "W=70",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrOriginal/ACTr0.3180W100x1y1.dat" w l t "W=100",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrOriginal/ACTr0.3180W150x1y1.dat" w l t "W=150", 0 lc "black"
+
+
+
+#------------------------------------------------------------------------------
+# Up Right
+#------------------------------------------------------------------------------ 
+     set title "Subritical"
+
+     set size 0.27,0.4
+     set origin 0.7,0.5
+plot "../2B-TimeCorrel/AC2-Autocorr/AutocorrOriginal/ACTr0.3300W30x1y1.dat" w l t "W=30",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrOriginal/ACTr0.3300W50x1y1.dat" w l t "W=50",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrOriginal/ACTr0.3300W70x1y1.dat" w l t "W=70",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrOriginal/ACTr0.3300W100x1y1.dat" w l t "W=100",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrOriginal/ACTr0.3300W150x1y1.dat" w l t "W=150", 0 lc "black"
+
+
+#------------------------------------------------------------------------------
+# Down Left
+#------------------------------------------------------------------------------ 
+     set size 0.27,0.4
+     set origin 0.1,0.1
+     set title "Supercritical-Convol"
+
+
+plot "../2B-TimeCorrel/AC2-Autocorr/AutocorrConvol/ACTr0.3100W30x1y1.dat" w l t "W=30",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrConvol/ACTr0.3100W50x1y1.dat" w l t "W=50",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrConvol/ACTr0.3100W70x1y1.dat" w l t "W=70",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrConvol/ACTr0.3100W100x1y1.dat" w l t "W=100",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrConvol/ACTr0.3100W150x1y1.dat" w l t "W=150", 0 lc "black"
+
+
+#------------------------------------------------------------------------------
+# Down Mid
+#------------------------------------------------------------------------------ 
+     set size 0.27,0.4
+     set origin 0.4,0.1
+     set title "Critical-Convol"
+	
+
+plot "../2B-TimeCorrel/AC2-Autocorr/AutocorrConvol/ACTr0.3180W30x1y1.dat" w l t "W=30",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrConvol/ACTr0.3180W50x1y1.dat" w l t "W=50",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrConvol/ACTr0.3180W70x1y1.dat" w l t "W=70",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrConvol/ACTr0.3180W100x1y1.dat" w l t "W=100",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrConvol/ACTr0.3180W150x1y1.dat" w l t "W=150", 0 lc "black"
+
+
+
+#------------------------------------------------------------------------------
+# Down Right
+#------------------------------------------------------------------------------ 
+     set title "Subritical-Convol"
+
+     set size 0.27,0.4
+     set origin 0.7,0.1
+plot "../2B-TimeCorrel/AC2-Autocorr/AutocorrConvol/ACTr0.3300W30x1y1.dat" w l t "W=30",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrConvol/ACTr0.3300W50x1y1.dat" w l t "W=50",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrConvol/ACTr0.3300W70x1y1.dat" w l t "W=70",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrConvol/ACTr0.3300W100x1y1.dat" w l t "W=100",\
+     "../2B-TimeCorrel/AC2-Autocorr/AutocorrConvol/ACTr0.3300W150x1y1.dat" w l t "W=150", 0 lc "black"
+
+	
+
+
+
+unset multiplot

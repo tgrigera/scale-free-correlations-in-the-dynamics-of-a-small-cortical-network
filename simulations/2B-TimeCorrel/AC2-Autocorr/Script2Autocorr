@@ -1,0 +1,14 @@
+# you need to use tcorr from glsim to compute time autocorrelations
+#T S Grigera, glsim: A general library for numerical simulation, Computer Physics Communications; vol. 182, no. 10 (2011)
+
+for folder in Original Convol; do
+mkdir -p Autocorr$folder
+for Tr in 0.3100 0.3180 0.3300; do
+for W in 30 50 70 100 150; do
+
+./tcorr -fCN ../AC1-ExtractActivity/ResultsAct$folder""/ActRun1-Tr$Tr""W$W""x1y1.dat | head -n 300 > Autocorr$folder""/ACTr$Tr""W$W""x1y1.dat
+
+
+done
+done
+done

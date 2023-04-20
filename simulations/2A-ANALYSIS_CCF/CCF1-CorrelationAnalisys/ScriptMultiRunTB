@@ -1,0 +1,62 @@
+# Run at least 5 values of i for figures.
+
+folder=TimeBinning
+for i in 1; do
+for Tr in 0.3180 0.3100 0.3300;do
+
+for W in 30 50 70 100 150; do
+
+
+
+for Dx in 0 1; do
+for Dy in 0 1; do
+#replace above lines by this ones to increase statistics
+#Dmax=$(echo "300/$W-1" |bc)
+#for Dx in $(seq 0 $Dmax); do
+#for Dy in $(seq 0 $Dmax); do
+
+startx=$(echo "1+$Dx""*$W" |bc -l)
+starty=$(echo "1+$Dy""*$W" |bc -l)
+
+echo Run: $i Tr: $Tr Window Size: $W  startx: $startx starty: $starty
+
+cp 2A-ComputeCCF.f90 Prog.f90
+#perl -pi -e "s[A-Basic][C-Arousal]g" Prog.f90
+perl -pi -e "s[Original][$folder]g" Prog.f90
+
+# Avoid Running if already run
+
+if  [ ! -f ResultsCorrel$folder""/CorrelRun$i""-Tr$Tr""W$W""x$startx""y$starty"".dat ];
+then
+
+#*** Make a copy of the program, searching & replacing the value of its variables ***
+
+# Now we have just 15000-5000=10000 systm configurations
+perl -pi -e "s[t_end=35000][t_end=15000]g" Prog.f90 
+
+
+perl -pi -e "s[ Run=1][ Run=$i]g" Prog.f90
+perl -pi -e "s[Threshold=0.3180][Threshold=$Tr]g" Prog.f90
+perl -pi -e "s[Window=100][Window=$W]g" Prog.f90
+perl -pi -e "s[startx=1][startx=$startx]g" Prog.f90
+perl -pi -e "s[starty=1][starty=$starty]g" Prog.f90
+
+# Save Computational Time Running not far from the zero crossing. 
+MAXDIST=$(grep $Tr ../MAXDISTtable | awk -v W=$W '{if ($2==W) print $3}')
+perl -pi -e "s[maxdist=180][maxdist=$MAXDIST]g" Prog.f90
+echo "MAXDIST:" $MAXDIST
+
+gfortran -O3 Prog.f90 -o PrunCCF
+echo "Computing CCF!"
+./PrunCCF
+
+
+fi
+
+done
+done
+done
+
+
+done
+done 

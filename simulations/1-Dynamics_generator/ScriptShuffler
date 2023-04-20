@@ -1,0 +1,20 @@
+echo "*******************************"
+echo "ONLY RUN AFTER RUNNING ORIGINAL"
+echo "*******************************"
+
+
+mkdir Shuffle
+cd Shuffle
+mkdir ResultsState
+cp ../Source/Shuffler.f90 .
+gfortran -O3 Shuffler.f90 -o Shuff
+
+
+for i in $(seq 1 1); do
+for Tr in 0.3180  0.3100 0.3300; do
+rm *.dat
+cp ../Original/ResultsState/StateRun$i""-Tr$Tr"".dat Input.dat
+./Shuff
+mv Output.dat ResultsState/StateRun$i""-Tr$Tr"".dat
+done
+done 

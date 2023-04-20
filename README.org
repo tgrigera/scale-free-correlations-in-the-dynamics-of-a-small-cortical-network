@@ -21,6 +21,11 @@ or, to get the version current when these scripts where created,
  - =time-corr.jl= :: Computes the time correlations using windows of different sizes.  Run by calling ~do_time_corr()~.
 
 
+*** Statistical tests and simulations
+
+ - Directory the [[file:./simulations][simulations]] directory contains the =Fortran= code scripts that perform the simulations and statistical tests described in the Supplementary Information, as well as the scripts used to generate the figures.
+
+
 ** License
 
 All code is licensed under the GNU General Public License, Version 3.

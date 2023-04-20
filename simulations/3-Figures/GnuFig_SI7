@@ -1,0 +1,57 @@
+# Run gnuplot GnuFig_SI*
+
+set terminal pdfcairo size 6.0in,2.0in font ',8'
+set output "Figure13.pdf"
+
+
+
+set key  font ",6" 
+#set xtics 0.05
+set yrange [-0.05:0.1]
+     set multiplot
+#------------------------------------------------------------------------------
+# Left
+#------------------------------------------------------------------------------ 
+     set size 0.25,0.8
+     set origin 0.1,0.1
+set xlabel "r"
+set ylabel "C(r)"
+
+
+plot "../2A-ANALYSIS_CCF/CCF2-ZeroFinder/AllCorrelationsOriginal/Correlation-Tr0.3180/AvgCCF-Tr0.3180Run1Length30.dat" w l title "W=30",\
+     "../2A-ANALYSIS_CCF/CCF2-ZeroFinder/AllCorrelationsOriginal/Correlation-Tr0.3180/AvgCCF-Tr0.3180Run1Length50.dat" w l title "W=50",\
+     "../2A-ANALYSIS_CCF/CCF2-ZeroFinder/AllCorrelationsOriginal/Correlation-Tr0.3180/AvgCCF-Tr0.3180Run1Length70.dat" w l title "W=70",\
+     "../2A-ANALYSIS_CCF/CCF2-ZeroFinder/AllCorrelationsOriginal/Correlation-Tr0.3180/AvgCCF-Tr0.3180Run1Length100.dat" w l title "W=100",\
+     "../2A-ANALYSIS_CCF/CCF2-ZeroFinder/AllCorrelationsOriginal/Correlation-Tr0.3180/AvgCCF-Tr0.3180Run1Length150.dat" w l title "W=150", 0 lc "black
+
+
+#------------------------------------------------------------------------------
+#  Mid
+#------------------------------------------------------------------------------ 
+     set size 0.25,0.8
+     set origin 0.4,0.1
+
+
+plot "../2A-ANALYSIS_CCF/CCF2-ZeroFinder/AllCorrelationsShuffle/Correlation-Tr0.3180/AvgCCF-Tr0.3180Run1Length30.dat" w l title "W=30",\
+     "../2A-ANALYSIS_CCF/CCF2-ZeroFinder/AllCorrelationsShuffle/Correlation-Tr0.3180/AvgCCF-Tr0.3180Run1Length50.dat" w l title "W=50",\
+     "../2A-ANALYSIS_CCF/CCF2-ZeroFinder/AllCorrelationsShuffle/Correlation-Tr0.3180/AvgCCF-Tr0.3180Run1Length70.dat" w l title "W=70",\
+     "../2A-ANALYSIS_CCF/CCF2-ZeroFinder/AllCorrelationsShuffle/Correlation-Tr0.3180/AvgCCF-Tr0.3180Run1Length100.dat" w l title "W=100",\
+     "../2A-ANALYSIS_CCF/CCF2-ZeroFinder/AllCorrelationsShuffle/Correlation-Tr0.3180/AvgCCF-Tr0.3180Run1Length150.dat" w l title "W=150", 0 lc "black"
+
+
+#------------------------------------------------------------------------------
+#  Right
+#------------------------------------------------------------------------------ 
+
+set xrange [*:*]
+set yrange [*:*]
+set xlabel "W"
+set ylabel "xi"
+
+     set size 0.25,0.8
+     set origin 0.7,0.1
+	
+
+
+plot "../2A-ANALYSIS_CCF/CCF2-ZeroFinder/AllZerosOriginal/Zeros-Tr0.3180/Zeros-Tr0.3180Run1.dat" w lp lc "black" title "Original",\
+     "../2A-ANALYSIS_CCF/CCF2-ZeroFinder/AllZerosShuffle/Zeros-Tr0.3180/Zeros-Tr0.3180Run1.dat" w lp lc "red" title "Shuffle",\

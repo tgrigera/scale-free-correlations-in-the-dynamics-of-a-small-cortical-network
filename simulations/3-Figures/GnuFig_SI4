@@ -1,0 +1,39 @@
+# Run gnuplot GnuFig_SI*
+
+set terminal pdfcairo size 4.0in,2.0in font ',8'
+set output "Figure10.pdf"
+
+
+
+set key  font ",6" 
+set xtics 0.05
+
+     set multiplot
+#------------------------------------------------------------------------------
+# Up Left
+#------------------------------------------------------------------------------ 
+     set size 0.4,0.8
+     set origin 0.1,0.1
+
+set xtics 50
+set ytics 30
+set xlabel "W"
+set ylabel "xi"
+
+plot "../2A-ANALYSIS_CCF/CCF2-ZeroFinder/AllZerosTimeBinning/Zeros-Tr0.3100/Zeros-Tr0.3100Run1.dat" w lp lc "blue" title "0.31",\
+     "../2A-ANALYSIS_CCF/CCF2-ZeroFinder/AllZerosTimeBinning/Zeros-Tr0.3180/Zeros-Tr0.3180Run1.dat" w lp lc "green" title "0.318",\
+     "../2A-ANALYSIS_CCF/CCF2-ZeroFinder/AllZerosTimeBinning/Zeros-Tr0.3300/Zeros-Tr0.3300Run1.dat" w lp lc "red" title "0.33",\
+
+
+#------------------------------------------------------------------------------
+# Up Mid
+#------------------------------------------------------------------------------ 
+set logscale x
+     set size 0.4,0.8
+     set origin 0.5,0.1
+	
+
+
+plot "../2A-ANALYSIS_CCF/CCF2-ZeroFinder/AllZerosTimeBinning/Zeros-Tr0.3100/Zeros-Tr0.3100Run1.dat" w lp lc "blue" title "0.31",\
+     "../2A-ANALYSIS_CCF/CCF2-ZeroFinder/AllZerosTimeBinning/Zeros-Tr0.3180/Zeros-Tr0.3180Run1.dat" w lp lc "green" title "0.318",\
+     "../2A-ANALYSIS_CCF/CCF2-ZeroFinder/AllZerosTimeBinning/Zeros-Tr0.3300/Zeros-Tr0.3300Run1.dat" w lp lc "red" title "0.33",\
